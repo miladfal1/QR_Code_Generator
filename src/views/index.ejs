@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>QR Code Generator</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 700px;
+        margin: 50px auto;
+      }
+      input[type="text"] {
+        padding: 8px;
+        width: 80%;
+      }
+      button {
+        padding: 8px 16px;
+        margin-left: 10px;
+      }
+      img {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+      }
+      code {
+        background: #eee;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🚀 QR Code Generator</h1>
+
+    <form action="/generate" method="POST">
+      <input type="text" name="text" placeholder="Enter text or URL" required />
+      <button type="submit">Generate</button>
+    </form>
+
+    <% if (qrPath) { %>
+    <h2>✅ Generated QR Code:</h2>
+    <img src="<%= qrPath %>" alt="QR Code" width="200" />
+    <% } %>
+
+    <hr />
+    <h2>Available API Endpoints:</h2>
+    <ul>
+      <% apis.forEach(api => { %>
+      <li><strong><%= api.method %></strong> <code><%= api.path %></code> – <%= api.description %></li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
