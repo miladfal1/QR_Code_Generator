@@ -80,21 +80,33 @@
       li {
         margin-bottom: 8px;
       }
+      .link {
+        text-decoration: none;
+        color: rgb(32, 159, 47);
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>🚀 QR Code Generator</h1>
 
-      <form action="/qr/show" method="POST">
+      <form action="/fetchQR" method="POST">
         <input type="text" name="text" placeholder="Enter text or URL" required />
         <button type="submit">Generate</button>
       </form>
+      <hr />
+      <a class="link" href="/history">📜 View QR History</a>
 
       <% if (qrPath) { %>
       <div class="qr-result">
         <h2>✅ Generated QR Code:</h2>
         <img src="<%= qrPath %>" alt="QR Code" width="200" />
+      </div>
+      <% } %> <% if (errors.length > 0) { %>
+      <div style="color: red; margin-bottom: 20px">
+        <% errors.forEach(function(err) { %>
+        <p><%= err %></p>
+        <% }) %>
       </div>
       <% } %>
     </div>

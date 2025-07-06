@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>QR Code History</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 800px;
+        margin: 40px auto;
+      }
+      .qr-card {
+        border: 1px solid #ddd;
+        padding: 16px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+      }
+      .qr-card img {
+        width: 150px;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+      }
+      .qr-text {
+        font-weight: bold;
+      }
+      .link {
+        text-decoration: none;
+        color: rgb(32, 159, 47);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📜 QR Code History</h1>
+
+    <% if (qrs.length === 0) { %>
+    <p>No QR codes generated yet.</p>
+    <% } else { %> <% qrs.forEach(qr => { %>
+    <div class="qr-card">
+      <div class="qr-text">🔗 <%= qr.text %></div>
+      <img src="<%= qr.path %>" alt="QR Code" />
+      <div>📅 <%= new Date(qr.createdAt).toLocaleString() %></div>
+      <a href="/download/<%= qr._id %>">⬇️ Download</a>
+    </div>
+
+    <% }) %> <% } %>
+
+    <a class="link" href="/">⬅ Back to Home</a>
+  </body>
+</html>
