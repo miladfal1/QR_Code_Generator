@@ -3,50 +3,100 @@
   <head>
     <meta charset="UTF-8" />
     <title>QR Code Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
     <style>
+      * {
+        box-sizing: border-box;
+      }
       body {
-        font-family: sans-serif;
-        max-width: 700px;
-        margin: 50px auto;
+        font-family: "Inter", sans-serif;
+        background: #f9f9f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 40px 20px;
+        color: #333;
+      }
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        max-width: 600px;
+        width: 100%;
+      }
+      h1 {
+        text-align: center;
+        color: #0d6efd;
+        margin-bottom: 24px;
+      }
+      form {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 24px;
       }
       input[type="text"] {
-        padding: 8px;
-        width: 80%;
+        flex-grow: 1;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
       }
       button {
-        padding: 8px 16px;
-        margin-left: 10px;
+        padding: 12px 20px;
+        border: none;
+        background: #0d6efd;
+        color: white;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s ease;
       }
-      img {
-        margin-top: 20px;
-        border: 1px solid #ccc;
+      button:hover {
+        background: #0b5ed7;
+      }
+      .qr-result {
+        text-align: center;
+        margin-top: 24px;
+      }
+      .qr-result img {
+        margin-top: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .api-section {
+        margin-top: 40px;
+      }
+      .api-section ul {
+        padding-left: 20px;
       }
       code {
-        background: #eee;
-        padding: 2px 4px;
+        background: #eef1f4;
+        padding: 2px 6px;
         border-radius: 4px;
+        font-family: monospace;
+      }
+      li {
+        margin-bottom: 8px;
       }
     </style>
   </head>
   <body>
-    <h1>🚀 QR Code Generator</h1>
+    <div class="container">
+      <h1>🚀 QR Code Generator</h1>
 
-    <form action="/generate" method="POST">
-      <input type="text" name="text" placeholder="Enter text or URL" required />
-      <button type="submit">Generate</button>
-    </form>
+      <form action="/qr/show" method="POST">
+        <input type="text" name="text" placeholder="Enter text or URL" required />
+        <button type="submit">Generate</button>
+      </form>
 
-    <% if (qrPath) { %>
-    <h2>✅ Generated QR Code:</h2>
-    <img src="<%= qrPath %>" alt="QR Code" width="200" />
-    <% } %>
-
-    <hr />
-    <h2>Available API Endpoints:</h2>
-    <ul>
-      <% apis.forEach(api => { %>
-      <li><strong><%= api.method %></strong> <code><%= api.path %></code> – <%= api.description %></li>
-      <% }) %>
-    </ul>
+      <% if (qrPath) { %>
+      <div class="qr-result">
+        <h2>✅ Generated QR Code:</h2>
+        <img src="<%= qrPath %>" alt="QR Code" width="200" />
+      </div>
+      <% } %>
+    </div>
   </body>
 </html>
